@@ -1,60 +1,81 @@
 //create schedule object
-var schedules = 
+var timeBlocks = 
 {
     nineAM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     tenAM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     elevenAM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     twelvePM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     onePM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     twoPM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     threePM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     fourPM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     },
     fivePM:
     {
-        timeSlot:"",
+        time:"",
         data: ""
     }
 }
 
-//function that loops schedule object and creates schedule blocks
-function createScheduleBlocks()
+//loop time object and create time blocks
+function createAllTimeBlocks()
 {
-    
+    //loop schedule object
+    for(var a in timeBlocks)
+    {
+        //create schedule block and pass in each property as id
+        createTimeBlock(a);
+    }
 }
 
-//create function that loops through schedule object and set correct color
+//create schedule block
+function createTimeBlock(id)
+{
+    var container = $(".container");
+    var timeBlock = $(`<div id="${id}" class="time-block"></div>`);
+    var row = $('<div class="row"></div>');
+    var hour = $('<div class="hour"></div>')
+    var textArea = $('<div class="textarea"></div>');
+    var saveBtn = $('<div class="saveBtn"></div>');
+    row.append(hour);
+    row.append(textArea);
+    row.append(saveBtn);
+    timeBlock.append(row);
+    container.append(timeBlock);
+}
+
+//loop through schedule object and set correct color
 function loopScheduleBlocks()
 {
 
