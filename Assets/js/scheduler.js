@@ -90,12 +90,15 @@ function createTimeBlock(id,timeLabel)
 }
 
 //check timeblock against 
-function checkTimeBlock(id,timeBlockTime)
+function checkTimeBlock(id,timeBlockStringTime)
 {
     //get time block text area
     var textArea = $(`#text_${id}`);
     //check current time against timeblock's time
-    if(moment(timeBlockTime, 'h:mma').isBefore(currentTime))
+    var timeBlockTime = moment(timeBlockStringTime,'h:mma');
+    console.log("time block: " + timeBlockTime);
+    console.log("time current: " + currentTime);
+    if(timeBlockTime.isBefore(currentTime))
     {
         //remove present, future and add past class
         textArea.removeClass('present future').addClass('past');
@@ -107,7 +110,7 @@ function checkTimeBlock(id,timeBlockTime)
 }
 
 //create global variable that holds current time
-var currentTime = moment().format('h:mma');
+var currentTime = moment();
 
 //updates cuurent day time in main banner of application
 function updateCurrentDay()
