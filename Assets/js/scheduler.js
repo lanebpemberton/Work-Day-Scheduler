@@ -6,7 +6,8 @@ function loadExistingTimeBlocks()
     if(timeBlocksString != null)
     {
         //overwrite default object with object from storage
-        var timeBlocks = JSON.parse(timeBlocksString);
+        console.log("overwrite timeblocks");
+        timeBlocks = JSON.parse(timeBlocksString);
     }
 }
 
@@ -85,13 +86,17 @@ function createAllTimeBlocks()
 //create schedule block
 function createTimeBlock(id,timeLabel)
 {
+    //get timeblock value
+    console.log("id: " + id);
+    var timeBlockValue = timeBlocks[id].value;
+    console.log("timeblox value: " + timeBlockValue);
     //get existing container from premade html
     var container = $(".container");
     //create dom elements to append to container
     var timeBlock = $(`<div id="${id}" class="time-block"></div>`);
     var row = $('<div class="row"></div>');
     var hour = $(`<h3 class="col-md-2 col-sm-12 hour">${timeLabel}</h3>`)
-    var textArea = $(`<textarea id="text_${id}" class="col-md-8 col-sm-12 textarea">${timeBlocks[id].value}</textarea>`);
+    var textArea = $(`<textarea id="text_${id}" class="col-md-8 col-sm-12 textarea">${timeBlockValue}</textarea>`);
     var saveBtn = $(`<button id="save_${id}" class="col-md-2 col-sm-12 saveBtn"><i class="far fa-save"></i></button>`);
     //append respective elements
     row.append(hour);
@@ -140,7 +145,7 @@ function onSaveBtn()
     //split out "save" from id to get timeblock id
     timeBlockProperty = timeBlockProperty.split("_")[1];//get second element from split array (first element is "save")
     //get text area value
-    var textAreaValue = $(`#text_${timeBlockProperty}`).text();
+    var textAreaValue = $(`#text_${timeBlockProperty}`).val();
     //update time block property with value from text area
     timeBlocks[timeBlockProperty].value = textAreaValue;
     //turn updated object into string
