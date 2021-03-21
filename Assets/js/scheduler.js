@@ -1,59 +1,71 @@
-//create schedule object
+function loadExistingTimeBlocks()
+{
+    //get time blocks string from local storage
+    var timeBlocksString = localStorage.getItem("timeBlocks");
+    //check to see if item is valid
+    if(timeBlocksString != null)
+    {
+        //overwrite default object with object from storage
+        var timeBlocks = JSON.parse(timeBlocksString);
+    }
+}
+
+//create time blocks object
 var timeBlocks = 
 {
     nineAM:
     {
         label:"9AM",
         time:"9:00am",
-        data: ""
+        value: ""
     },
     tenAM:
     {
         label:"10AM",
         time:"10:00am",
-        data: ""
+        value: ""
     },
     elevenAM:
     {
         label:"11AM",
         time:"11:00am",
-        data: ""
+        value: ""
     },
     twelvePM:
     {
         label:"12PM",
         time:"12:00pm",
-        data: ""
+        value: ""
     },
     onePM:
     {
         label:"1PM",
         time:"1:00pm",
-        data: ""
+        value: ""
     },
     twoPM:
     {
         label:"2PM",
         time:"2:00pm",
-        data: ""
+        value: ""
     },
     threePM:
     {
         label:"3PM",
         time:"3:00pm",
-        data: ""
+        value: ""
     },
     fourPM:
     {
         label:"4PM",
         time:"4:00pm",
-        data: ""
+        value: ""
     },
     fivePM:
     {
         label:"5PM",
         time:"5:00pm",
-        data: ""
+        value: ""
     }
 }
 
@@ -79,7 +91,7 @@ function createTimeBlock(id,timeLabel)
     var timeBlock = $(`<div id="${id}" class="time-block"></div>`);
     var row = $('<div class="row"></div>');
     var hour = $(`<h3 class="col-md-2 col-sm-12 hour">${timeLabel}</h3>`)
-    var textArea = $(`<textarea id="text_${id}" class="col-md-8 col-sm-12 textarea"></textarea>`);
+    var textArea = $(`<textarea id="text_${id}" class="col-md-8 col-sm-12 textarea">${timeBlocks[id].value}</textarea>`);
     var saveBtn = $(`<button id="save_${id}" class="col-md-2 col-sm-12 saveBtn"><i class="far fa-save"></i></button>`);
     //append respective elements
     row.append(hour);
@@ -122,5 +134,26 @@ function updateCurrentDay()
     currentDay.text(moment().format('dddd, MMMM Do YYYY'));
 }
 
+function onSaveBtn()
+{
+    var timeBlockProperty = this.id;
+    //split out "save" from id to get timeblock id
+    timeBlockProperty = timeBlockProperty.split("_")[1];//get second element from split array (first element is "save")
+    //get text area value
+    var textAreaValue = $(`#text_${timeBlockProperty}`).text();
+    //update time block property with value from text area
+    timeBlocks[timeBlockProperty].value = textAreaValue;
+    //turn updated object into string
+    var timeBlocksString = JSON.stringify(timeBlocks);
+    //save string to local storage
+    localStorage.setItem("timeBlocks",timeBlocksString);
+}
+
+//load time blocks from local storage
+loadExistingTimeBlocks();
 updateCurrentDay();
 createAllTimeBlocks();
+//get all save buttons
+var saveButtons = $('.saveBtn');
+//assign save function to all save buttons
+saveButtons.click(onSaveBtn);
