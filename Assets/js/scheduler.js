@@ -94,11 +94,14 @@ function checkTimeBlock(id,timeBlockStringTime)
 {
     //get time block text area
     var textArea = $(`#text_${id}`);
-    //check current time against timeblock's time
+    //create moment object from timeblock property
     var timeBlockTime = moment(timeBlockStringTime,'h:mma');
-    console.log("time block: " + timeBlockTime);
-    console.log("time current: " + currentTime);
-    if(timeBlockTime.isBefore(currentTime))
+    //check for time in curent hour first
+    if(moment().startOf('hour').isSame(timeBlockTime))
+    {
+        //remove past, future and add present class
+        textArea.removeClass('past future').addClass('present');
+    }else if(timeBlockTime.isBefore(currentTime))
     {
         //remove present, future and add past class
         textArea.removeClass('present future').addClass('past');
