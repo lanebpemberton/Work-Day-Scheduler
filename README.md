@@ -1,19 +1,12 @@
-# Name
-Work Day Scheduler
+# Work Day Scheduler
 
 ## Description
 
-Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
+Lightweight application that allows a user to save their schedule for the day in intuitive, color coded time blocks
 
-You'll need to use the [Moment.js](https://momentjs.com/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Moment.js in the browser.
+## Intended Interface
 
-## User Story
-
-```md
-AS AN employee with a busy schedule
-I WANT to add important events to a daily planner
-SO THAT I can manage my time effectively
-```
+![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/website-interface.png)
 
 ## Acceptance Criteria
 
@@ -32,11 +25,6 @@ THEN the text for that event is saved in local storage
 WHEN I refresh the page
 THEN the saved events persist
 ```
-
-The following animation demonstrates the application functionality:
-
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/05-third-party-apis-homework-demo.gif)
-
 
 ## Grading Requirements
 
